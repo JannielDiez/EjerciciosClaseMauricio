@@ -632,14 +632,9 @@ public class Practicas {
 			// Leer el fichero linea a linea
 			for (int i = 0; i < resultado.length; i++) {
 		// System.out.println(inferior + rnd.nextInt(superior - inferior + 1));		
-				resultado[i] += 1 + rnd.nextInt(6 - 1 + 1);
-				
-				bw.write(i+1 + "#" + resultado[i]+"\n");
-
-				
-				
+				resultado[i] += 1 + rnd.nextInt(6 - 1 + 1);				
+				bw.write(i+1 + "#" + resultado[i]+"\n"); 								
 			//	System.out.println(calculaEdad(campos[2]));
-
 			}
 			bw.close();
 			fw.close();
