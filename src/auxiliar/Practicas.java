@@ -1,14 +1,19 @@
 package auxiliar;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -49,10 +54,10 @@ public class Practicas {
 	// 11 enero 2018
 	// Leer una matriz de int y devolverla como ArrayList
 
-	public ArrayList<ArrayList<Integer>> convierteMatrizArrayLista(int[][] matriz) {
+	public ArrayList<ArrayList<Integer>> convierteMatrizArrayLista(ArrayList<ArrayList<Integer>> matriz) {
 
 		ArrayList<ArrayList<Integer>> resultado = new ArrayList<ArrayList<Integer>>();
-		for (int[] filaMatriz : matriz) {
+		for (ArrayList<Integer> filaMatriz : matriz) {
 			// crear alist
 			ArrayList<Integer> filaLista = new ArrayList<Integer>();
 			for (int numero : filaMatriz)
@@ -138,6 +143,19 @@ public class Practicas {
 		HashMap<String, Float> resultado = new HashMap<String, Float>();
 		// recorrer hm de entrada creando el de salida
 
+		Set<String> claves = ventas.keySet();
+		for (String clave : claves) {
+			ArrayList<Float> listasVentas = ventas.get(clave);
+			float acomuladoVendedor=0;
+			for (Float importe : listasVentas) {
+				acomuladoVendedor+= importe;
+				resultado.put(clave, acomuladoVendedor);
+			}
+		}
+		
+		
+		
+		
 		return resultado;
 	}
 
@@ -308,12 +326,30 @@ public class Practicas {
 	}
 	// mezcla dos arrays ordenados
 
-	public int[] mezclaArrays(int[] l1, int[] l2) {
+	public ArrayList<Integer> mezclaArrays(ArrayList<Integer> l1, ArrayList<Integer> l2) {
 		int i = 0, j = 0, k = 0;
-		int[] resultado = new int[l1.length + l2.length];
+		ArrayList<Integer> resultado = new ArrayList<Integer>();
 
-		while (l1[i] != Integer.MAX_VALUE || l2[j] != Integer.MAX_VALUE) {
-			if (l1[i] < l2[j])
+		//while (l1[i] != Integer.MAX_VALUE || l2[j] != Integer.MAX_VALUE) {
+		/*for (Integer elemento : l1) {
+			for (Integer elemento1 : l2) {
+				elemento = Integer.MAX_VALUE;
+				elemento1= Integer.MAX_VALUE;
+				if (elemento < elemento1) {
+					resultado.add(elemento);
+				else
+					resultado.add(elemento1);
+				}
+			
+				if (i == l1.length)
+					l1[--i] = Integer.MAX_VALUE;
+
+				if (j == l2.length)
+					l2[--j] = Integer.MAX_VALUE;
+				}	
+			}*/
+		
+	/*	if (l1[i] < l2[j])
 				resultado[k] = l1[i++];
 			else
 				resultado[k] = l2[j++];
@@ -324,7 +360,7 @@ public class Practicas {
 
 			if (j == l2.length)
 				l2[--j] = Integer.MAX_VALUE;
-		}
+		}*/
 		return resultado;
 	}
 
@@ -357,21 +393,6 @@ public class Practicas {
 	 * saldoFinal = saldoInicial; for (int i = 0; i < movimientos.length; i++)
 	 * saldoFinal += movimientos[i]; return saldoFinal; }
 	 */
-
-	public int[] convierteCadenasANumeros(String[] cadenas) {
-		int[] resultado = new int[cadenas.length];
-		for (int i = 0; i < resultado.length; i++) {
-
-			try {
-
-				resultado[i] = Integer.parseInt(cadenas[i]);
-			} catch (NumberFormatException e) {
-
-				resultado[i] = -1;
-			}
-		}
-		return resultado;
-	}
 
 	public void muestraNumeros() {
 
@@ -495,7 +516,7 @@ public class Practicas {
 				System.out.println(estudiante.getNombre());
 			} catch (NullPointerException e) {
 
-			} 
+			}
 		}
 	}
 
@@ -574,9 +595,72 @@ public class Practicas {
 			saldoFinal += elemento;
 		return saldoFinal;
 	}
+	/*
+	 * public float calculaSaldo(float saldoInicial, float[] movimientos) { float
+	 * saldoFinal = saldoInicial; for (int i = 0; i < movimientos.length; i++)
+	 * saldoFinal += movimientos[i]; return saldoFinal; }
+	 */
+
+	public ArrayList<Integer> convierteCadenasANumeros(ArrayList<String> cadenas) {
+		ArrayList<Integer> resultado = new ArrayList<Integer>();
+		for (String elementos : cadenas) {
+			{
+
+				try {
+
+					resultado.add(Integer.parseInt(elementos));
+				} catch (NumberFormatException e) {
+
+					resultado.add(-1);
+				}
+			}
+		}
+		return resultado;
+	}
+
+
+	public void generaFicheroLanzamientoDado(int cuantos) {
+	
+		int[] resultado = new int[cuantos];
+		
+		try {
+			// Abrir el fichero
+			FileWriter fw = new FileWriter("ficheros/ResultadoDado.txt");
+			BufferedWriter bw = new BufferedWriter(fw);
+			Random rnd = new Random();
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			for (int i = 0; i < resultado.length; i++) {
+		// System.out.println(inferior + rnd.nextInt(superior - inferior + 1));		
+				resultado[i] += 1 + rnd.nextInt(6 - 1 + 1);
+				
+				bw.write(i+1 + "#" + resultado[i]+"\n");
+
+				
+				
+			//	System.out.println(calculaEdad(campos[2]));
+
+			}
+			bw.close();
+			fw.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
+
+
 /*
- * public float calculaSaldo(float saldoInicial, float[] movimientos) { float
- * saldoFinal = saldoInicial; for (int i = 0; i < movimientos.length; i++)
- * saldoFinal += movimientos[i]; return saldoFinal; }
+ * public int[] convierteCadenasANumeros(String[] cadenas) { int[] resultado =
+ * new int[cadenas.length]; for (int i = 0; i < resultado.length; i++) {
+ * 
+ * try {
+ * 
+ * resultado[i] = Integer.parseInt(cadenas[i]); } catch (NumberFormatException
+ * e) {
+ * 
+ * resultado[i] = -1; } } return resultado; }
  */

@@ -66,7 +66,7 @@ public class Principal {
 				{ 23, 3, 56, 12, 32, 23, 17, 12, 11, 34, 45, 45 }, { 23, 1, 56, 12, 32, 23, 17, 12, 11, 34, 45, 37 }
 
 		};
-		ArrayList<ArrayList<Integer>> listaMatriz = practicas.convierteMatrizArrayLista(visitantesYear);
+		//ArrayList<ArrayList<Integer>> listaMatriz = practicas.convierteMatrizArrayLista(visitantesYear);
 		
 		
 		
@@ -99,7 +99,7 @@ public class Principal {
 		practicas.ordenaCadenas(cadenas);
 		int[] array2 = { 3, 6, 9, 9, 9, 15, 29 };
 		int[] array1 = { 1, 2, 9, 9, 25, 39, 56, 67, 99 };
-		int[] arrayMezclado = practicas.mezclaArrays(array1, array2);
+		//int[] arrayMezclado = practicas.mezclaArrays(array1, array2);
 		// liga
 		String[][] goles = new Datos().getResultados();
 
@@ -151,6 +151,28 @@ public class Principal {
 		saldo.add(19.33f);
 		saldo.add(18.44f);
 		practicas.calculaSaldo(80.00F,saldo);
+		
+		
+		ArrayList<String>elementos = new ArrayList<String>();
+		elementos.add("8");
+		elementos.add("4");
+		elementos.add("2");
+		elementos.add("5");
+		
+		practicas.convierteCadenasANumeros(elementos);
+			
+		ArrayList<Integer> subMatriz = new ArrayList<Integer>();
+		subMatriz.add(1);
+		subMatriz.add(20);
+		subMatriz.add(4);
+		subMatriz.add(6);
+		ArrayList<ArrayList<Integer>> matriz1 = new ArrayList<ArrayList<Integer>>();
+		matriz1.add(subMatriz);
+		practicas.convierteMatrizArrayLista(matriz1);
+		
+		//HashMap<String,ArrayList<Float>> resumenVentasVendedor = practicas.resumenVentasPorVendedor();
+		
+		practicas.generaFicheroLanzamientoDado(25);
 		
 		System.out.println("fin");
 
