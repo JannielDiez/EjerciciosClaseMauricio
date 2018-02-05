@@ -20,6 +20,7 @@ import java.util.Set;
 import modelo.Datos;
 import modelo.Equipo;
 import modelo.Estudiante;
+import modelo.Vehiculo;
 
 public class Practicas {
 
@@ -645,6 +646,81 @@ public class Practicas {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	public ArrayList<Vehiculo> leerVehiculo() {
+		
+		ArrayList<Vehiculo> listadoFinal = new ArrayList<Vehiculo>();
+		
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader("ficheros/Vehiculos.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+
+				String[] campos = linea.split("#");				
+				int id =Integer.parseInt(campos[0]);
+				
+				String matricula = campos[1];
+				String marcaModelo = campos[2];
+				int dia =Integer.parseInt(campos[3].split("/")[0]);
+				int mes =Integer.parseInt(campos[3].split("/")[1]);
+				int year =Integer.parseInt(campos[3].split("/")[2]);
+				LocalDate fechaMatricula = LocalDate.of(year, mes, dia);
+				float precio = Float.parseFloat(campos[4])*1000;
+				
+				Vehiculo vehiculo = new Vehiculo(id,matricula,marcaModelo,fechaMatricula,precio);
+				
+				listadoFinal.add(vehiculo);
+				
+			}
+			
+			fr.close();
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return listadoFinal;
+	}
+
+	
+	
+	
+	
+	public void generarListadoVehiculo() {
+		
+		//int[] resultado = new int[cuantos];
+		Vehiculo vehiculo = new Vehiculo();
+		
+		try {
+			// Abrir el fichero
+			FileWriter fw = new FileWriter("ficheros/nuevaListaVehiculos.txt");
+			BufferedWriter bw = new BufferedWriter(fw);
+			Random rnd = new Random();
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			for (Vehiculo elementos : cadenas) {
+				
+			}
+		// System.out.println(inferior + rnd.nextInt(superior - inferior + 1));		
+				//resultado[i] += 1 + rnd.nextInt(6 - 1 + 1);				
+				bw.write(i+1 + "#" + elemento[i]+"\n"); 								
+			//	System.out.println(calculaEdad(campos[2]));
+			}
+			bw.close();
+			fw.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
 }
 
 

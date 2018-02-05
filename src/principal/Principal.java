@@ -173,7 +173,7 @@ public class Principal {
 		//HashMap<String,ArrayList<Float>> resumenVentasVendedor = practicas.resumenVentasPorVendedor();
 		
 		practicas.generaFicheroLanzamientoDado(25);
-		
+		practicas.leerVehiculo();
 		System.out.println("fin");
 
 	}
